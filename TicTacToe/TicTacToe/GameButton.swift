@@ -2,7 +2,7 @@
 //  GameButton.swift
 //  TicTacToe
 //
-//  Created by Alex Paul on 11/8/18.
+//  Created by Joshua Viera on 11/8/18.
 //  Copyright © 2018 Pursuit. All rights reserved.
 //
 
