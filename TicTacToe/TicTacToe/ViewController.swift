@@ -12,15 +12,14 @@ import UIKit
 class ViewController: UIViewController {
     
     var gameBrain: TicTacToeBrain = TicTacToeBrain()
-    @IBOutlet var allButtons: [UIButton]!
-    //This is the shit im working on rihgt now
     
+    @IBOutlet var allButtons: [UIButton]!
     @IBOutlet weak var playerOne: UILabel!
     @IBOutlet weak var playerTwo: UILabel!
     @IBOutlet weak var score: UILabel!
-    
     @IBOutlet weak var winLabel: UILabel!
     @IBOutlet weak var playerTurn: UILabel!
+    
     var winCounterOne = 0
     var winCounterTwo = 0
     
@@ -32,47 +31,49 @@ class ViewController: UIViewController {
     func reset() {
         allButtons.forEach({$0.isEnabled = false})
         gameBrain.resetGameBoard()
-        winLabel.text = ""
     }
     
     @IBAction func buttonPressed(_ sender: GameButton) {
-        //this is updating the gameBrain
+        
         switch gameBrain.playerTurn {
         case .playerOne: gameBrain.gameboard[sender.row][sender.col] = .x
-             sender.setTitle(gameBrain.playerTurn.rawValue, for: .normal)
+        playerTurn.text = "O's Turn"
+        sender.setTitle(gameBrain.playerTurn.rawValue, for: .normal)
         case .playerTwo: gameBrain.gameboard[sender.row][sender.col] = .o
-             sender.setTitle(gameBrain.playerTurn.rawValue, for: .normal)
+        playerTurn.text = "X's Turn"
+        sender.setTitle(gameBrain.playerTurn.rawValue, for: .normal)
         }
-        //        print(gameBrain.gameboard)
         sender.isEnabled = false
+        
         switch gameBrain.checkForWin(){
-        case .player1Wins:
-            winLabel.text = "Player One Won"
+        case .player1Wins :
             winCounterOne += 1
-            playerOne.text = "Player1: \(winCounterOne)"
+            playerOne.text = "Player1 X: \(winCounterOne)"
+            winLabel.text = "Player X Wins!"
+            score.text = "Score:"
             reset()
-        case .player2Wins:
-            winLabel.text = "Player Two Won"
+        case .player2Wins :
             winCounterTwo += 1
-            playerTwo.text = "Player2: \(winCounterTwo)"
+            playerTwo.text = "Player2 O: \(winCounterTwo)"
+            winLabel.text = "Player O Wins!"
+            score.text = "Score:"
             reset()
-            
-        case .onGoing: winLabel.text = ""
-        case .tie : winLabel.text = "ITS A TIE !"
+        case .onGoing :
+            winLabel.text = ""
+        case .tie :
+            winLabel.text = "ITS A TIE !"
         }
         gameBrain.playerTurn.toggle()
     }
-    
-    
-    
-    
-    
+
     @IBAction func restartGame(_ sender: UIButton) {
         for button in allButtons {
             button.setTitle(nil, for: .normal)
             button.isEnabled = true
+            winLabel.text = ""
+            playerTurn.text = ""
+            score.text = ""
         }
     }
-    
 }
 

@@ -12,32 +12,29 @@ import Foundation
 class TicTacToeBrain {
     
     enum Square: String {
-        case x = "x" // playerOne -> once clicked
-        case o = "o" // playerTwo -> once clicked
-        case empty = "" // has not been clicked yet
+        case x = "X"
+        case o = "O"
+        case empty = ""
     }
     
     var gameboard =  [[Square]](repeating: [Square](repeating: .empty, count: 3), count: 3)
-
-    //creates an instance of player
+    
     var playerTurn = Turn.playerOne
     
-    //creates playerOne and Two
     enum Turn: String {
         case playerOne = "X"
         case playerTwo = "O"
         
-        //changes between player one and player two
-        mutating func toggle() {//mutating changes the value
-            switch self {//changes which instance is being seleetced
-            case .playerOne://player1 = player2
+        mutating func toggle() {
+            switch self {
+            case .playerOne:
                 self = .playerTwo
-            case .playerTwo://player2 = player1
+            case .playerTwo:
                 self = .playerOne
             }
-
         }
     }
+    
     func checkForWin() -> GameState{
         //Horizontal
         for row in gameboard {
@@ -83,7 +80,7 @@ class TicTacToeBrain {
     
     
     func resetGameBoard() {
-       gameboard = [[Square]](repeating: [Square](repeating: .empty, count: 3), count: 3)
+        gameboard = [[Square]](repeating: [Square](repeating: .empty, count: 3), count: 3)
     }
     
     enum GameState {
