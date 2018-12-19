@@ -48,22 +48,24 @@ class ViewController: UIViewController {
         switch gameBrain.checkForWin(){
         case .player1Wins :
             winCounterOne += 1
-            playerOne.text = "Player1 X: \(winCounterOne)"
-            winLabel.text = "Player X Wins!"
-            score.text = "Score:"
-            reset()
+
+            doStuff()
         case .player2Wins :
             winCounterTwo += 1
-            playerTwo.text = "Player2 O: \(winCounterTwo)"
-            winLabel.text = "Player O Wins!"
-            score.text = "Score:"
-            reset()
+            doStuff()
         case .onGoing :
             winLabel.text = ""
         case .tie :
             winLabel.text = "ITS A TIE !"
         }
         gameBrain.playerTurn.toggle()
+    }
+    func doStuff() {
+        playerOne.text = "Player 1: \(winCounterOne)"
+        playerTwo.text = "Player 2: \(winCounterTwo)"
+        winLabel.text = "\(gameBrain.checkForWin().rawValue)!"
+        score.text = "Wins: "
+        reset()
     }
 
     @IBAction func restartGame(_ sender: UIButton) {
@@ -72,7 +74,6 @@ class ViewController: UIViewController {
             button.isEnabled = true
             winLabel.text = ""
             playerTurn.text = ""
-            score.text = ""
         }
     }
 }

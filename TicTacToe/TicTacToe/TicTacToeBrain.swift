@@ -83,10 +83,10 @@ class TicTacToeBrain {
         gameboard = [[Square]](repeating: [Square](repeating: .empty, count: 3), count: 3)
     }
     
-    enum GameState {
-        case player1Wins
-        case player2Wins
-        case tie
+    enum GameState : String{
+        case player1Wins = "Player 1 Wins"
+        case player2Wins = "Player 2 Wins"
+        case tie 
         case onGoing
     }    
 }
